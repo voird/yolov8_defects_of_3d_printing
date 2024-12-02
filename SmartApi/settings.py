@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-1nbu%8#5_5*axju-*%f!tm&qxo3f+&$5ub8y#*(e7!=-&d8nl5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "YoloObjectDetectionAPI",
+"storages",
 ]
 
 MIDDLEWARE = [
@@ -126,4 +127,37 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media/images/media/')
+
+
+import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "access_key": "***",
+            "secret_key": "***",
+            "bucket_name": "django-project",
+            "endpoint_url": "https://storage.yandexcloud.net",
+            "region_name": "ru-central1",
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
+# settings.py
+
+AWS_ACCESS_KEY_ID = '***'
+AWS_SECRET_ACCESS_KEY = '***' 
+AWS_STORAGE_BUCKET_NAME = 'django-project' 
+AWS_S3_REGION_NAME = 'ru-central1' 
+# settings.py
+
+AWS_S3_ENDPOINT_URL = 'https://storage.yandexcloud.net' 
+
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
