@@ -1,0 +1,15 @@
+{% block content %}
+  <h2>Загрузите изображение для обработки</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="image">Выберите изображение:</label>
+    <input type="file" name="image" accept="image/*" required>
+    <button type="submit">Загрузить</button>
+  </form>
+
+  {% if image_url %}
+    <h3>Обработанное изображение</h3>
+    <img src="{{ image_url }}" alt="Processed Image" style="max-width: 100%; height: auto;">
+  {% endif %}
+{% endblock %}
