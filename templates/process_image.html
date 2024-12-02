@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загруженные изображения</title>
+    <style>
+        img {
+            max-width: 300px; /* Установка максимальной ширины изображения */
+            height: auto; /* Автоматическое вычисление высоты, чтобы сохранить пропорции */
+        }
+        .image-info {
+            display: inline-block;
+            margin-left: 20px; /* Отступ между изображением и информацией */
+        }
+    </style>
+</head>
+<body>
+    <h1>Загруженные изображения</h1>
+    <ul>
+        {% for image in images %}
+            <li>
+                <img src="{{ image.image_file.url }}" alt="Image">
+                <div class="image-info"> Обработано в: {{ image.processed_timestamp|date:"d.m.y H:i" }}</div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        // Функция для периодического обновления страницы каждые 5 секунд
+        setInterval(function() {
+            location.reload();
+        }, 5000000);
+    </script>
+</body>
+</html>
