@@ -24,7 +24,7 @@ def process_images(input_folder, output_folder):
         with open(image_path, 'rb') as image_file:
             files = {'image_file': image_file}
             payload = {'confidence_threshold': 0.02}
-            response = requests.post('http://localhost:8000/yolov8/upload/', files=files, data=payload)
+            response = requests.post('http://158.160.135.12/yolov8/upload/', files=files, data=payload)
 
             if response.status_code == 201:
                 print(f"Upload Successful for {image_name}")
@@ -35,6 +35,6 @@ def process_images(input_folder, output_folder):
             else:
                 print(f"Upload Failed for {image_name}", response.text)
 
-input_folder = 'D:\kursovaya\Django-Yolov8-API-App-main\Django-Yolov8-API-App-main\examples\example_images'
+input_folder = '/home/adminv/Django-Yolov8-API-App-main/Django-Yolov8-API-App-main/examples/example_images'
 output_folder = 'example_images_output'
 process_images(input_folder, output_folder)
